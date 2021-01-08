@@ -10,12 +10,14 @@ Public Function curls(ArgsCount As Integer, Args1 As String, Args2 As String) As
   s = New Socket
   sss = ""
   i = 80
-  ss = "localhost"
+  ss = "127.0.0.1"
   If ArgsCount > 1 Then ss = Args1
   If ArgsCount > 2 Then 
     sss = Args2
     i = Val(sss)
   Endif
+  ss = Replace(ss, "localhost", "127.0.0.1")
+  ss = Replace(ss, "LOCALHOST", "127.0.0.1")
   ss = Replace(ss, "http:", "")
   ss = Replace(ss, "//", "")
   ssss = ""
@@ -36,6 +38,7 @@ Public Function curls(ArgsCount As Integer, Args1 As String, Args2 As String) As
     Wait 0.1
   Loop
   Read #s, sss, Lof(s)
+  Close s
   ii = InStr(sss, gb.CrLf & gb.Crlf)
   If ii > 0 Then
     sss = Mid(sss, ii + 4)
@@ -72,80 +75,7 @@ If i > 0 Then
 Endif
 
 vv = curls(ii, v, vv)
-  i = InStr(vv, "<body>")
-  If i < 1 Then i = InStr(vv, "<BODY>")
-  If i > 0 Then 
-    i = i + 6
-    vv = Mid(vv, i, Len(vv) - i)
-  Endif
-  i = InStr(vv, "</body>")
-  If i < 1 Then i = InStr(vv, "</BODY>")
-  If i > 0 Then 
-    vv = Mid(vv, 1, i - 1)
-  Endif
-  vv = Replace(vv, "<B>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</B>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<b>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</b>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<ul>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<tr>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</tr>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<TR>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<TR>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</ul>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<UL>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</UL>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<li>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</li>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<LI>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</LI>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<a>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<A>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</a>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</A>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</A>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<br>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<BR>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</br>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</BR>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</p>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</P>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<p>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<P>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<a href=", Chr(13) & Chr(10))
-  vv = Replace(vv, "<A HREF=", Chr(13) & Chr(10))
-  vv = Replace(vv, "<H1>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<H2>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<H3>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<H4>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<H5>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</H1>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</H2>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</H3>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</H4>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</H5>", Chr(13) & Chr(10))
-vv = Replace(vv, "<h1>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<h2>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<h3>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<h4>", Chr(13) & Chr(10))
-  vv = Replace(vv, "<h5>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</h1>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</h2>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</h3>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</h4>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</h5>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</i>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</I>", Chr(13) & Chr(10))
- vv = Replace(vv, "<i>", Chr(13) & Chr(10))
-  vv = Replace(vv, "</I>", Chr(13) & Chr(10))
-vv = Replace(vv, "<hr>", Chr(13) & Chr(10))
-vv = Replace(vv, "</hr>", Chr(13) & Chr(10))
-vv = Replace(vv, "</HR>", Chr(13) & Chr(10))
-vv = Replace(vv, "<HR>", Chr(13) & Chr(10))
-vv = Replace(vv, "<ui>", Chr(13) & Chr(10))
-vv = Replace(vv, "</ui>", Chr(13) & Chr(10))
-vv = Replace(vv, "<UI>", Chr(13) & Chr(10))
-vv = Replace(vv, "</UI>", Chr(13) & Chr(10))
+  
 TextArea1.text = vv
 End Sub
 
